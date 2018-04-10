@@ -26,6 +26,8 @@ class ContactsController {
                 $this->deleteContact();
             } elseif ( $op == 'show' ) {
                 $this->showContact();
+            } elseif ( $op == 'edit' ) {
+                $this->editContact();
             } else {
                 $this->showError("Page not found", "Page for operation ".$op." was not found!");
             }
@@ -36,7 +38,7 @@ class ContactsController {
     }
     
     public function listContacts() {
-        $orderby = isset($_GET['orderby'])?$_GET['orderby']:NULL;
+        $orderby = isset($_GET['orderby'])?$_GET['orderby']:'name';
         $contacts = $this->contactsService->getAllContacts($orderby);
         include 'view/contacts.php';
     }
@@ -90,6 +92,42 @@ class ContactsController {
         $contact = $this->contactsService->getContact($id);
         
         include 'view/contact.php';
+    }
+
+    public function editContact() {
+
+        $title = 'Add new contact';
+
+        $id = isset($_GET['id'])?$_GET['id']:NULL;
+        if ( !$id ) {
+            throw new Exception('Internal error.');
+        }
+        $contact = $this->contactsService->getContact($id);
+        
+        $name = $contact->getName();
+        $phone = $contact->getPhone();
+        $email = $contact->getEmail();
+        $address = $contact->getAddress();
+       
+        $errors = array();
+        
+        if ( isset($_POST['form-submitted']) ) {
+            
+            $name       = isset($_POST['name']) ?   $_POST['name']  :NULL;
+            $phone      = isset($_POST['phone'])?   $_POST['phone'] :NULL;
+            $email      = isset($_POST['email'])?   $_POST['email'] :NULL;
+            $address    = isset($_POST['address'])? $_POST['address']:NULL;
+            
+            try {
+                $this->contactsService->editContact($id, $name, $phone, $email, $address);
+                $this->redirect('index.php');
+                return;
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+        }
+        
+        include 'view/contact-form.php';
     }
     
     public function showError($title, $message) {

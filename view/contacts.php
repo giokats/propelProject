@@ -39,16 +39,18 @@
                     <th><a href="?orderby=email">Email</a></th>
                     <th><a href="?orderby=address">Address</a></th>
                     <th>&nbsp;</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
             <?php foreach ($contacts as $contact): ?>
                 <tr>
-                    <td><a href="index.php?op=show&id=<?php print $contact->id; ?>"><?php print htmlentities($contact->name); ?></a></td>
-                    <td><?php print htmlentities($contact->phone); ?></td>
-                    <td><?php print htmlentities($contact->email); ?></td>
-                    <td><?php print htmlentities($contact->address); ?></td>
-                    <td><a href="index.php?op=delete&id=<?php print $contact->id; ?>">delete</a></td>
+                    <td><a href="index.php?op=show&id=<?php print $contact->getId(); ?>"><?php print $contact->getName(); ?></a></td>
+                    <td><?php print $contact->getPhone(); ?></td>
+                    <td><?php print $contact->getEmail(); ?></td>
+                    <td><?php print $contact->getAddress(); ?></td>
+                    <td><a href="index.php?op=edit&id=<?php print $contact->getId(); ?>">edit</a></td>
+                    <td><a href="index.php?op=delete&id=<?php print $contact->getId(); ?>">delete</a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

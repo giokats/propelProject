@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 require 'model/connection.php';
 
 //use dbmodels\mycontacts\mycontacts\Contacts;
-//use dbmodels\mycontacts\mycontacts\ContactsQuery;
+//use \mycontacts\mycontacts\ContactsQuery;
 /**
  * Table data gateway.
  * 
@@ -13,17 +13,17 @@ require 'model/connection.php';
 class ContactsGateway {
     
     public function selectAll($order, $conn) {
-        // if ( !isset($order) ) {
-        //     $order = "name";
-        // }
-        // $dbOrder =  mysqli_real_escape_string($conn, $order);
-        // $dbres = mysqli_query($conn, "SELECT * FROM contacts ORDER BY $dbOrder ASC");
+        if ( !isset($order) ) {
+            $order = "name";
+        }
+        $dbOrder =  mysqli_real_escape_string($conn, $order);
+        $dbres = mysqli_query($conn, "SELECT * FROM contacts ORDER BY $dbOrder ASC");
         
-        // $contacts = array();
-        // while ( ($obj = mysqli_fetch_object($dbres)) != NULL ) {
-        //     $contacts[] = $obj;
-        // }
-        $contacts = ContactsQuery::create()->find();
+        $contacts = array();
+        while ( ($obj = mysqli_fetch_object($dbres)) != NULL ) {
+            $contacts[] = $obj;
+        }
+        //$contacts = ContactsQuery::create()->find();
         
         return $contacts;
     }

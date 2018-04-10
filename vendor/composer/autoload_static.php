@@ -82,12 +82,21 @@ class ComposerStaticInitf9f26aa95804cdb42b492ebb7706f487
         ),
     );
 
+    public static $classMap = array (
+        'mycontacts\\mycontacts\\Base\\Contacts' => __DIR__ . '/../..' . '/dbmodels/mycontacts/mycontacts/Base/Contacts.php',
+        'mycontacts\\mycontacts\\Base\\ContactsQuery' => __DIR__ . '/../..' . '/dbmodels/mycontacts/mycontacts/Base/ContactsQuery.php',
+        'mycontacts\\mycontacts\\Contacts' => __DIR__ . '/../..' . '/dbmodels/mycontacts/mycontacts/Contacts.php',
+        'mycontacts\\mycontacts\\ContactsQuery' => __DIR__ . '/../..' . '/dbmodels/mycontacts/mycontacts/ContactsQuery.php',
+        'mycontacts\\mycontacts\\Map\\ContactsTableMap' => __DIR__ . '/../..' . '/dbmodels/mycontacts/mycontacts/Map/ContactsTableMap.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitf9f26aa95804cdb42b492ebb7706f487::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitf9f26aa95804cdb42b492ebb7706f487::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitf9f26aa95804cdb42b492ebb7706f487::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitf9f26aa95804cdb42b492ebb7706f487::$classMap;
 
         }, null, ClassLoader::class);
     }

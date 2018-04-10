@@ -6,4 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'mycontacts\\mycontacts\\Base\\Contacts' => $baseDir . '/dbmodels/mycontacts/mycontacts/Base/Contacts.php',
+    'mycontacts\\mycontacts\\Base\\ContactsQuery' => $baseDir . '/dbmodels/mycontacts/mycontacts/Base/ContactsQuery.php',
+    'mycontacts\\mycontacts\\Contacts' => $baseDir . '/dbmodels/mycontacts/mycontacts/Contacts.php',
+    'mycontacts\\mycontacts\\ContactsQuery' => $baseDir . '/dbmodels/mycontacts/mycontacts/ContactsQuery.php',
+    'mycontacts\\mycontacts\\Map\\ContactsTableMap' => $baseDir . '/dbmodels/mycontacts/mycontacts/Map/ContactsTableMap.php',
 );
